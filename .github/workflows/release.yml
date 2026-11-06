@@ -250,19 +250,13 @@ jobs:
           VERSION: ${{ needs.publish.outputs.version }}
           SHA256_ARM64: ${{ needs.publish.outputs.sha256_arm64 }}
           SHA256_X86_64: ${{ needs.publish.outputs.sha256_x86_64 }}
-          DMG_ARM64: ${{ needs.publish.outputs.dmg_arm64 }}
-          DMG_X86_64: ${{ needs.publish.outputs.dmg_x86_64 }}
         run: |
           set -euo pipefail
           mkdir -p tap/Casks
-          URL_ARM64="https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/${DMG_ARM64}"
-          URL_X86_64="https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/${DMG_X86_64}"
           sed \
             -e "s|__VERSION__|${VERSION}|g" \
             -e "s|__SHA256_ARM64__|${SHA256_ARM64}|g" \
             -e "s|__SHA256_X86_64__|${SHA256_X86_64}|g" \
-            -e "s|__URL_ARM64__|${URL_ARM64}|g" \
-            -e "s|__URL_X86_64__|${URL_X86_64}|g" \
             app/docs/homebrew/prusa-statusbar.rb.tmpl \
             > tap/Casks/prusa-statusbar.rb
           cat tap/Casks/prusa-statusbar.rb

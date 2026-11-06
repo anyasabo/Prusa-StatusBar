@@ -1,15 +1,11 @@
 cask "prusa-statusbar" do
+  arch arm: "arm64", intel: "x86_64"
+
   version "__VERSION__"
+  sha256 arm:   "__SHA256_ARM64__",
+         intel: "__SHA256_X86_64__"
 
-  on_arm do
-    sha256 "__SHA256_ARM64__"
-    url "__URL_ARM64__"
-  end
-
-  on_intel do
-    sha256 "__SHA256_X86_64__"
-    url "__URL_X86_64__"
-  end
+  url "https://github.com/deimosfr/Prusa-StatusBar/releases/download/v#{version}/PrusaStatusBar-#{version}-#{arch}.dmg"
 
   name "Prusa StatusBar"
   desc "Menu bar app to monitor PrusaLink-equipped 3D printers"
